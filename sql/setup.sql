@@ -4,7 +4,7 @@ DROP TABLE if EXISTS users;
 
 CREATE TABLE users (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    email TEXT NOT NULL,
+    email VARCHAR NOT NULL UNIQUE,
     password_hash TEXT NOT NULL,
     first_name TEXT,
     last_name TEXT
