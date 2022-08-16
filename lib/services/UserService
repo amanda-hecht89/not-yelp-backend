@@ -15,7 +15,6 @@ module.exports = class UserService {
   static async signIn({ email, password = '' }) {
     try {
       const user = await User.getByEmail(email);
-      console.log('panda', user);
       if(!user) throw new Error('Invalid email');
       if (!bcrypt.compareSync(password, user.passwordHash))
         throw new Error('Invaild password');
@@ -24,7 +23,6 @@ module.exports = class UserService {
       });
       return token;
     } catch (error) {
-      console.log(error);
       error.status = 401;
       throw error;
     }
