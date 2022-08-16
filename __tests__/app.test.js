@@ -3,6 +3,7 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 const UserService = require('../lib/services/UserService');
+const { agent } = require('supertest');
 
 const mockUser = {
   firstName: 'Karen',
@@ -50,7 +51,11 @@ describe('not yelp backend', () => {
   it('shows list of users for authenticated members only', async () => {
     const [agent] = await registerAndLogin();
     const res = await agent.get('/api/v1/users');
-    console.log(res.body);
+    expect(res.status).toBe(200);
+  });
+
+  it('shows lists of resturants', async () => {
+    const res = await request(app).get('/api/v1/resturants');
     expect(res.status).toBe(200);
   });
 
