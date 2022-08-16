@@ -58,6 +58,21 @@ describe('not yelp backend', () => {
     expect(res.status).toBe(200);
   });
 
+  it('should return data from single restuarant review', async () => {
+    const res = await request(app).get('/api/v1/resruarant/:id');
+    expect(res.body).toHaveProperty('id', '1');
+    expect(res.body).toHaveProperty('name', 'Pizza Planet');
+    expect(res.body).toHaveProperty('style', 'Pizza');
+    expect(res.body).toHaveProperty('stars', '4');
+    expect(res.body.users).toHaveProperty('id', '2');
+    expect(res.body.users).toHaveProperty('first_name', 'steph');
+    expect(res.body.users).toHaveProperty('last_name', 'Curry');
+    expect(res.body.users).toHaveProperty('email', 'toospiceyforme@basketballplayer.com');
+    expect(res.body.users).toHaveProperty('password', 'fake_password');
+
+
+  });
+
 
 
   afterAll(() => {

@@ -37,11 +37,11 @@ INSERT into restuarants (name, style, stars) values
 ('Krusty Krab', 'Seafood', '4');
 
 INSERT into users (first_name, last_name, email, password_hash) values 
-('Kevin', 'Bacon', 'ilovepork@meatsweats.com', 'fake password'),
-('Steph', 'Curry', 'toospiceyforme@basketballplayer.com', 'fake password'),
-('Iced', 'Tea', 'sweetisbetter@beverages.com', 'fake password'),
-('John', 'Candy', 'ioverdosed@cocaine.com', 'fake password'),
-('Shirley', 'Temple', 'spriteandgrenadine@underaged.com', 'fake password');
+('Kevin', 'Bacon', 'ilovepork@meatsweats.com', 'fake_password'),
+('Steph', 'Curry', 'toospiceyforme@basketballplayer.com', 'fake_password'),
+('Iced', 'Tea', 'sweetisbetter@beverages.com', 'fake_password'),
+('John', 'Candy', 'ioverdosed@cocaine.com', 'fake_password'),
+('Shirley', 'Temple', 'spriteandgrenadine@underaged.com', 'fake_password');
 
 INSERT into reviews (restuarant_id, user_id, stars, details) values
 ('3', '1', '4', 'Was able to put bacon on my burger'),
