@@ -55,7 +55,6 @@ describe('not yelp backend', () => {
 
   it('shows lists of restuarants', async () => {
     const res = await request(app).get('/api/v1/restuarants');
-    console.log(res.error);
     expect(res.status).toBe(200);
   });
 
