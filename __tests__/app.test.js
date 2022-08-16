@@ -31,7 +31,8 @@ describe('not yelp backend', () => {
   });
 
   it('logs in existing user and give same token back', async () => {
-    const res = await request(app).post('/api/v1/users/sessions').send({ firstName: 'Karen', lastName: 'Pumpernickle', email: 'imimportant@admin.com', password: 'shutItDown' });
+    await request(app).post('/api/v1/users/').send(mockUser);
+    const res = await request(app).post('/api/v1/users/sessions').send({ email: 'imimportant@admin.com', password: 'shutItDown' });
     expect(res.status).toEqual(200);
   });
 
