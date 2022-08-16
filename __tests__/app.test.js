@@ -50,6 +50,7 @@ describe('not yelp backend', () => {
   it('shows list of users for authenticated members only', async () => {
     const [agent] = await registerAndLogin();
     const res = await agent.get('/api/v1/users');
+    console.log(res.body);
     expect(res.status).toBe(200);
   });
 
