@@ -23,7 +23,7 @@ describe('not yelp backend', () => {
     expect(res.body).toEqual({
       Message: 'Welcome!',
 
-      user: {id: expect.any(String),
+      user: { id: expect.any(String),
         firstName,
         lastName,
         email, }
