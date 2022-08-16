@@ -15,17 +15,18 @@ describe('not yelp backend', () => {
     return setup(pool);
   });
 
-  it('creates a new user and logs in same user', () => {
-    const res = request(app).post('/api/v1/users/')
-      .send({ firstName: 'Karen', lastName: 'Pumpernickle', email: 'imimportant@admin.com', password: 'shutItDown' });
+  it('creates a new user and logs in same user', async () => {
+    const res = await request(app).post('/api/v1/users/')
+      .send(mockUser);
     const { firstName, lastName, email } = mockUser;
-    
-    expect(res.body).toEqual({
 
-      id: expect.any(String),
-      firstName,
-      lastName,
-      email,
+    expect(res.body).toEqual({
+      Message: 'Welcome!',
+
+      user: {id: expect.any(String),
+        firstName,
+        lastName,
+        email, }
     });
   });
 
