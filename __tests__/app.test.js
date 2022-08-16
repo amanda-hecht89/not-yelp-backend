@@ -69,8 +69,6 @@ describe('not yelp backend', () => {
     expect(res.body.users).toHaveProperty('last_name', 'Curry');
     expect(res.body.users).toHaveProperty('email', 'toospiceyforme@basketballplayer.com');
     expect(res.body.users).toHaveProperty('password', 'fake_password');
-
-
   });
 
 
