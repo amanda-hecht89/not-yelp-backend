@@ -25,6 +25,7 @@ describe('not yelp backend', () => {
     return setup(pool);
   });
 
+
   it('creates a new user and logs in same user', async () => {
     const res = await request(app).post('/api/v1/users/')
       .send(mockUser);
@@ -40,6 +41,7 @@ describe('not yelp backend', () => {
     });
   });
 
+
   it('logs in existing user and give same token back', async () => {
     await request(app).post('/api/v1/users/').send(mockUser);
     const res = await request(app).post('/api/v1/users/sessions').send({ email: 'imimportant@admin.com', password: 'shutItDown' });
@@ -53,22 +55,24 @@ describe('not yelp backend', () => {
     expect(res.status).toBe(200);
   });
 
+
   it('shows lists of restuarants', async () => {
     const res = await request(app).get('/api/v1/restuarants');
     expect(res.status).toBe(200);
   });
 
+
   it('should return data from single restuarant review', async () => {
-    const res = await request(app).get('/api/v1/resruarant/:id');
+    const res = await request(app).get('/api/v1/restuarants/1');
+    console.log(res.body);
+
     expect(res.body).toHaveProperty('id', '1');
     expect(res.body).toHaveProperty('name', 'Pizza Planet');
     expect(res.body).toHaveProperty('style', 'Pizza');
     expect(res.body).toHaveProperty('stars', '4');
-    expect(res.body.users).toHaveProperty('id', '2');
-    expect(res.body.users).toHaveProperty('first_name', 'steph');
-    expect(res.body.users).toHaveProperty('last_name', 'Curry');
-    expect(res.body.users).toHaveProperty('email', 'toospiceyforme@basketballplayer.com');
-    expect(res.body.users).toHaveProperty('password', 'fake_password');
+    expect(res.body.reviews[0]).toHaveProperty('id', '3');
+    // expect(res.body.reviews[0]).toHaveProperty('first_name', 'Steph');
+    // expect(res.body.reviews[0]).toHaveProperty('last_name', 'Curry');
   });
 
 
