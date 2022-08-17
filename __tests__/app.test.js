@@ -49,6 +49,7 @@ describe('not yelp backend', () => {
   });
 
 
+
   it('shows list of users for authenticated members only', async () => {
     const [agent] = await registerAndLogin();
     const res = await agent.get('/api/v1/users');
@@ -56,10 +57,12 @@ describe('not yelp backend', () => {
   });
 
 
+
   it('shows lists of restuarants', async () => {
     const res = await request(app).get('/api/v1/restuarants');
     expect(res.status).toBe(200);
   });
+
 
 
   it('should return data from single restuarant review', async () => {
@@ -72,6 +75,7 @@ describe('not yelp backend', () => {
   });
 
 
+
   it('should create a new review for authorized user', async () => {
     const newReview = {
       'stars': '2',
@@ -80,12 +84,19 @@ describe('not yelp backend', () => {
     };
     const [agent] = await registerAndLogin();
     const res = await agent.post('/api/v1/restuarants/5/reviews').send(newReview);
-    console.log('fight', res.body);
     expect(res.body).toEqual({
       id: expect.any(String),
       ...newReview
     });
+  });
 
+
+  it('should delete review for authorized user', async () => {
+    const [agent] = await registerAndLogin();
+    const res = await agent.delete('/api/v1/reviews/:id');
+    expect(res.status).toBe(200);
+    const reviewResp = await request(app).get('/api/v1/reviews/:id');
+    expect(reviewResp.status).toBe(404);
   });
 
 
