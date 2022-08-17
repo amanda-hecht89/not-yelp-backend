@@ -76,14 +76,15 @@ describe('not yelp backend', () => {
     const newReview = {
       'stars': '2',
       'details': 'Not a seafood person, horrible location',
+      'restuarant_id': '5',
     };
     const [agent] = await registerAndLogin();
-    const res = await agent.post('/api/v1/restuarants/:restId/reviews').send(newReview);
+    const res = await agent.post('/api/v1/restuarants/5/reviews').send(newReview);
+    console.log('fight', res.body);
     expect(res.body).toEqual({
       id: expect.any(String),
       ...newReview
     });
-
 
   });
 
