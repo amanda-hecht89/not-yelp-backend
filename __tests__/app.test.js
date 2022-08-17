@@ -93,9 +93,9 @@ describe('not yelp backend', () => {
 
   it('should delete review for authorized user', async () => {
     const [agent] = await registerAndLogin();
-    const res = await agent.delete('/api/v1/reviews/:id');
+    const res = await agent.delete('/api/v1/reviews/3');
     expect(res.status).toBe(200);
-    const reviewResp = await request(app).get('/api/v1/reviews/:id');
+    const reviewResp = await request(app).get('/api/v1/reviews/3');
     expect(reviewResp.status).toBe(404);
   });
 
