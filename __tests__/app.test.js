@@ -19,7 +19,6 @@ const registerAndLogin = async (userProps = {}) => {
   await agent.post('/api/v1/users/sessions').send({ email, password });
   return [agent, user];
 };
-
 describe('not yelp backend', () => {
   beforeEach(() => {
     return setup(pool);
@@ -41,6 +40,7 @@ describe('not yelp backend', () => {
     });
   });
 
+  
 
   it('logs in existing user and give same token back', async () => {
     await request(app).post('/api/v1/users/').send(mockUser);
@@ -64,15 +64,27 @@ describe('not yelp backend', () => {
 
   it('should return data from single restuarant review', async () => {
     const res = await request(app).get('/api/v1/restuarants/1');
-    console.log(res.body);
-
     expect(res.body).toHaveProperty('id', '1');
     expect(res.body).toHaveProperty('name', 'Pizza Planet');
     expect(res.body).toHaveProperty('style', 'Pizza');
     expect(res.body).toHaveProperty('stars', '4');
     expect(res.body.reviews[0]).toHaveProperty('id', '3');
-    // expect(res.body.reviews[0]).toHaveProperty('first_name', 'Steph');
-    // expect(res.body.reviews[0]).toHaveProperty('last_name', 'Curry');
+  });
+
+
+  it('should create a new review for authorized user', async () => {
+    const newReview = {
+      'stars': '2',
+      'details': 'Not a seafood person, horrible location',
+    };
+    const [agent] = await registerAndLogin();
+    const res = await agent.post('/api/v1/restuarants/:restId/reviews').send(newReview);
+    expect(res.body).toEqual({
+      id: expect.any(String),
+      ...newReview
+    });
+
+
   });
 
 
